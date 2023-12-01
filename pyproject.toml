@@ -1,0 +1,14 @@
+[tool.black]
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.'MESSAGES_CONTROL']
+max-line-length = 88
+disable = [
+    "C0114", # missing-module-docstring
+    "C0116", # missing-function-docstring
+    "W1514", # unspecified-encoding
+]
