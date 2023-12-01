@@ -4,8 +4,6 @@ import re
 def part_1() -> None:
     def find_first_and_last_digit_sum(value: str) -> int:
         digits = re.findall(r"\d", value)
-        if len(digits) == 0:
-            return 0
         return int(digits[0] + digits[-1])
 
     # cSpell: disable
@@ -43,25 +41,17 @@ def part_2() -> None:
         "eight",
         "nine",
     ]
-    rev_digits: list[str] = []
-    for d in digits:
-        rev_digits.append(d[::-1])
 
-    pattern: re.Pattern[str] = re.compile("([1-9]|" + "|".join(digits) + ")")
-    rev_pattern: re.Pattern[str] = re.compile("([1-9]|" + "|".join(rev_digits) + ")")
+    # TIL about positive lookahead!
+    pattern: re.Pattern[str] = re.compile("(?=([1-9]|" + "|".join(digits) + "))")
 
     def find_first_and_last_digit_sum(value: str) -> int:
         res: list[str] = pattern.findall(value)
-        res_r: list[str] = rev_pattern.findall(value[::-1])
 
         def to_int(v: str) -> str:
-            if v.isdigit():
-                return v
-            if v in digits:
-                return str(digits.index(v) + 1)
-            return ""
+            return v if v.isdigit() else str(digits.index(v) + 1)
 
-        return int(to_int(res[0]) + to_int(res_r[0][::-1]))
+        return int(to_int(res[0]) + to_int(res[-1]))
 
     # cSpell: disable
     test: list[str] = [
