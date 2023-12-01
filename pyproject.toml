@@ -1,9 +1,43 @@
+[tool.poetry]
+version = "0.1.0"
+name = "aoc2023"
+repository = "https://github.com/joce/AoC2023-py"
+homepage = "https://github.com/joce/AoC2023-py"
+
+description = "Advent of Code 2023 in Python"
+authors = ["Jocelyn Legault <jocelynlegault@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.11.0"
+flake8 = "^6.1"
+isort = "^5.12"
+pylint = "^3.0"
+pyright = "^1.1"
+pytest = "^7.4"
+pytest-timeout = "^2.2.0"
+pytest-md = "^0.2"
+
 [tool.black]
-target-version = ["py38", "py39", "py310", "py311", "py312"]
 line-length = 88
 
 [tool.isort]
 profile = "black"
+
+[tool.pyright]
+include = ["src", "tests"]
+typeCheckingMode = "strict"
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+testpaths = ["tests"]
+timeout = 10
+
+[tool.pylint.'MASTER']
+# To make sure we can access the src directory
+init-hook = 'import sys; sys.path.append("src")'
 
 [tool.pylint.'MESSAGES_CONTROL']
 max-line-length = 88
@@ -12,3 +46,7 @@ disable = [
     "C0116", # missing-function-docstring
     "W1514", # unspecified-encoding
 ]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
