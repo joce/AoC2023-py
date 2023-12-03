@@ -43,6 +43,7 @@ init-hook = 'import sys; sys.path.append("src")'
 max-line-length = 88
 disable = [
     "C0114", # missing-module-docstring
+    "C0115", # missing-class-docstring
     "C0116", # missing-function-docstring
     "W1514", # unspecified-encoding
 ]

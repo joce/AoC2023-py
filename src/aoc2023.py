@@ -1,4 +1,4 @@
-import day1
+import day2
 
-day1.part_1()
-day1.part_2()
+day2.part_1()
+day2.part_2()
