@@ -1,5 +1,6 @@
 import os.path
 import re
+import time
 
 
 def parse_input(value: str) -> tuple[int, list[int], list[int]]:
@@ -44,39 +45,32 @@ def compute_total(cards: list[str]) -> int:
 
 
 def compute_cards_count(cards_def: list[str]) -> int:
-    cards: list[tuple[int, list[int], list[int]]] = list(map(parse_input, cards_def))
-    cache: list[int] = [-1] * len(cards)
+    cache: list[int] = [
+        count_wins(card[1], card[2]) for card in list(map(parse_input, cards_def))
+    ]
 
     def compute_wins(idx: int, cnt: int) -> int:
         wins: int = cnt
         for i in range(idx, idx + cnt):
-            curr_wins = cache[i]
-            if curr_wins == -1:
-                curr_wins: int = count_wins(cards[i][1], cards[i][2])
-                cache[i] = curr_wins
-            if curr_wins == 0:
-                continue
-            wins += compute_wins(i + 1, curr_wins)
+            if cache[i] > 0:
+                wins += compute_wins(i + 1, cache[i])
         return wins
 
-    return compute_wins(0, len(cards))
+    return compute_wins(0, len(cards_def))
 
 
 def compute_cards_count_iter(cards_def: list[str]) -> int:
-    cards: list[tuple[int, list[int], list[int]]] = list(map(parse_input, cards_def))
     wins: int = 0
-    stack: list[tuple[int, int]] = [(0, len(cards))]
-    cache: list[int] = [-1] * len(cards)
+    stack: list[tuple[int, int]] = [(0, len(cards_def))]
+    cache: list[int] = [
+        count_wins(card[1], card[2]) for card in list(map(parse_input, cards_def))
+    ]
 
     while stack:
         idx, cnt = stack.pop()
         for i in range(idx, idx + cnt):
-            curr_wins = cache[i]
-            if curr_wins == -1:
-                curr_wins: int = count_wins(cards[i][1], cards[i][2])
-                cache[i] = curr_wins
-            if curr_wins > 0:
-                stack.append((i + 1, curr_wins))
+            if cache[i] > 0:
+                stack.append((i + 1, cache[i]))
         wins += cnt
 
     return wins
@@ -88,7 +82,19 @@ def part_1() -> None:
         print(compute_total(cards))
 
 
-def part_2() -> None:
+def part_2iter() -> None:
+    t_start = time.perf_counter()
     with open(os.path.join(os.path.dirname(__file__), "day4.txt")) as f:
         cards: list[str] = f.readlines()
         print(compute_cards_count_iter(cards))
+    t_end = time.perf_counter()
+    print(f"Time iter: {t_end - t_start}")
+
+
+def part_2rec() -> None:
+    t_start = time.perf_counter()
+    with open(os.path.join(os.path.dirname(__file__), "day4.txt")) as f:
+        cards: list[str] = f.readlines()
+        print(compute_cards_count(cards))
+    t_end = time.perf_counter()
+    print(f"Time rec: {t_end - t_start}")
