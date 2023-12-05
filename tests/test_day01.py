@@ -1,6 +1,6 @@
 import pytest
 
-from day1 import find_first_and_last_digit, find_first_and_last_digit_2
+from day01 import find_first_and_last_digit, find_first_and_last_digit_2
 
 
 @pytest.mark.parametrize(

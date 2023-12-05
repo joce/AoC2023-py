@@ -10,7 +10,7 @@ def find_first_and_last_digit(value: str) -> int:
 
 def part_1() -> None:
     # Read all the value from the file day1.txt
-    with open(os.path.join(os.path.dirname(__file__), "day1.txt")) as f:
+    with open(os.path.join(os.path.dirname(__file__), "day01.txt")) as f:
         lines: list[str] = f.readlines()
         res: int = sum(find_first_and_last_digit(line) for line in lines)
         print(f"Answer is: {res}")
@@ -41,7 +41,7 @@ def find_first_and_last_digit_2(value: str) -> int:
 
 
 def part_2() -> None:
-    with open(os.path.join(os.path.dirname(__file__), "day1.txt")) as f:
+    with open(os.path.join(os.path.dirname(__file__), "day01.txt")) as f:
         lines: list[str] = f.readlines()
         res: int = sum(find_first_and_last_digit_2(line) for line in lines)
         print(f"Answer is: {res}")

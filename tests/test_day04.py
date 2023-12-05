@@ -1,6 +1,6 @@
 import pytest
 
-import day4
+import day04
 
 
 @pytest.mark.parametrize(
@@ -33,7 +33,7 @@ import day4
     ],
 )
 def test_parse_input(value: str, expected: tuple[int, list[int], list[int]]) -> None:
-    assert day4.parse_input(value) == expected
+    assert day04.parse_input(value) == expected
 
 
 @pytest.mark.parametrize(
@@ -48,7 +48,7 @@ def test_parse_input(value: str, expected: tuple[int, list[int], list[int]]) -> 
     ],
 )
 def test_count_wins(winning: list[int], own: list[int], expected: int) -> None:
-    assert day4.count_wins(winning, own) == expected
+    assert day04.count_wins(winning, own) == expected
 
 
 @pytest.mark.parametrize(
@@ -56,7 +56,7 @@ def test_count_wins(winning: list[int], own: list[int], expected: int) -> None:
     [(0, 0), (1, 1), (2, 2), (3, 4), (4, 8), (5, 16), (6, 32), (7, 64), (8, 128)],
 )
 def test_score(value: int, expected: int) -> None:
-    assert day4.score(value) == expected
+    assert day04.score(value) == expected
 
 
 def test_day4() -> None:
@@ -68,6 +68,6 @@ def test_day4() -> None:
         "Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36",
         "Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11",
     ]
-    assert day4.compute_total(values) == 13
-    assert day4.compute_cards_count(values) == 30
-    assert day4.compute_cards_count_iter(values) == 30
+    assert day04.compute_total(values) == 13
+    assert day04.compute_cards_count(values) == 30
+    assert day04.compute_cards_count_iter(values) == 30

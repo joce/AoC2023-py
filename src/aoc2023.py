@@ -1,5 +1,5 @@
-import day4
+import day04
 
-# day4.part_1()
-day4.part_2rec()
-day4.part_2iter()
+# day04.part_1()
+day04.part_2rec()
+day04.part_2iter()

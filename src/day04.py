@@ -77,14 +77,14 @@ def compute_cards_count_iter(cards_def: list[str]) -> int:
 
 
 def part_1() -> None:
-    with open(os.path.join(os.path.dirname(__file__), "day4.txt")) as f:
+    with open(os.path.join(os.path.dirname(__file__), "day04.txt")) as f:
         cards: list[str] = f.readlines()
         print(compute_total(cards))
 
 
 def part_2iter() -> None:
     t_start = time.perf_counter()
-    with open(os.path.join(os.path.dirname(__file__), "day4.txt")) as f:
+    with open(os.path.join(os.path.dirname(__file__), "day04.txt")) as f:
         cards: list[str] = f.readlines()
         print(compute_cards_count_iter(cards))
     t_end = time.perf_counter()
@@ -93,7 +93,7 @@ def part_2iter() -> None:
 
 def part_2rec() -> None:
     t_start = time.perf_counter()
-    with open(os.path.join(os.path.dirname(__file__), "day4.txt")) as f:
+    with open(os.path.join(os.path.dirname(__file__), "day04.txt")) as f:
         cards: list[str] = f.readlines()
         print(compute_cards_count(cards))
     t_end = time.perf_counter()
